@@ -1,7 +1,10 @@
-from flask import Flask, request
+from src.app import app
+from src.models import Client
 
-app = Flask(__name__)
+# usually have logger is other file and import module
+import logging
 
+logging.basicConfig(filename="banking_api.log", level=logging.INFO)
 
 # POST /clients => Creates a new client return a 201 status code
 @app.route("/clients", methods=["POST"])
@@ -9,14 +12,15 @@ def new_client():
     pass
 
 # GET /clients => gets all clients return 200
-@app.route("/")
+@app.route("/clients", methods=["GET"])
 def get_clients():
-    pass
+    return { "message": "Welcome to my project routes!"}
 
 # GET /clients/10 => get client with id of 10 return 404 if no such client exist
-@app.route("/clients/<id>")
+@app.route("/clients/<id>",  methods=["GET"])
 def get_client(id):
-    pass
+    logging.info(f"Client id is {id}")
+    return
 
 # PUT /clients/12 => updates client with id of 12 return 404 if no such client exist
 @app.route("/clients/<id>", methods=["PUT"])
@@ -34,17 +38,17 @@ def add_client_account(id):
     pass
 
 # GET /clients/7/accounts => get all accounts for client 7 return 404 if no client exists
-@app.route("/clients/<id>/accounts")
+@app.route("/clients/<id>/accounts",  methods=["GET"])
 def get_client_accounts(id):
     pass
 
 # GET /clients/7/accounts?amountLessThan=2000&amountGreaterThan400 => get all accounts for client 7 between 400 and 2000 return 404 if no client exists
-@app.route("/clients/<id>/accounts")
+@app.route("/clients/<id>/accounts",  methods=["GET"])
 def get_client_accounts_between_400_2000(id):
     pass
 
 # GET /clients/9/accounts/4 => get account 4 for client 9 return 404 if no account or client exists
-@app.route("/clients/<client_id>/accounts/<account_id>")
+@app.route("/clients/<client_id>/accounts/<account_id>",  methods=["GET"])
 def get_client_account(client_id, account_id):
     pass
 
@@ -64,9 +68,6 @@ def update_client_account_balance(client_id, account_id):
     pass
 
 # PATCH /clients/12/accounts/7/transfer/8 => transfer funds from account 7 to account 8 (Body: {"amount":500}) return 404 if no client or either account exists return 422 if insufficient funds
-@app.route("/clients/<client_id>/accounts/<account1_id>/transfer/<account2_id>")
+@app.route("/clients/<client_id>/accounts/<account1_id>/transfer/<account2_id>",  methods=["PATCH"])
 def  transfer_between_accounts(client_id, account1_id, account2_id):
     pass
-
-if __name__ == '__main__':
-    app.run(debug=True)
