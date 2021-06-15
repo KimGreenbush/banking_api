@@ -1,5 +1,5 @@
 # server set up
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
