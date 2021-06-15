@@ -1,4 +1,8 @@
 from unittest import TestCase
 
 class AccountTest(TestCase):
-    pass
+        def setUp(self):
+            pass
+
+        def tearDown(self):
+            pass
