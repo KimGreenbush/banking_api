@@ -1,3 +1,4 @@
+from flask import request
 from src.app import app
 from src.models import Client
 
@@ -9,6 +10,7 @@ logging.basicConfig(filename="banking_api.log", level=logging.INFO)
 # POST /clients => Creates a new client return a 201 status code
 @app.route("/clients", methods=["POST"])
 def new_client():
+    logging.info(request.get_json())
     pass
 
 # GET /clients => gets all clients return 200
